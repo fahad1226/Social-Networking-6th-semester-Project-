@@ -63,7 +63,9 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
+        
         $profile = Profile::find($id);
+        $this->authorize('update',$profile);
         return view('pages.profile.edit_profile',compact('profile'));
     }
 
@@ -108,7 +110,7 @@ class ProfileController extends Controller
             auth()->user()->profile->update(['image'=>$fullname]);
           } 
 
-        return redirect('posts');
+        return redirect('user/'.auth()->user()->id.'/edit');
 
     }
 

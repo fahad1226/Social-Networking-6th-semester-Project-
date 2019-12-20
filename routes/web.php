@@ -23,6 +23,13 @@ Route::get('user/{id}/timeline','UserController@timeline')->name('timeline');
 Route::patch('user/{id}/update', 'ProfileController@update');
 Route::get('post/{id}/detail', 'PostController@detail');
 
+//Comments Route
+
+Route::post('post/{id}/comment', 'PostController@storeComment');
+
+
+
+
 //Following
 
 Route::post('/follow/{user}', 'FollowsController@store');

@@ -40,7 +40,14 @@
                 <h4>Follow More Users</h4>
                 <ul class="list-group">
                     @foreach ($followusers as $user)
-                        <li class="list-group-item"> {{ $user->user->name ??  'n/a'}}</li> 
+                        
+                        <a href=" {{ url('user/'.$user->id) }} ">
+                           <li class="list-group-item"> 
+                            <img class="rounded-circle" height="40px" width="40px" src="{{ url('uploads/'.$user->user->profile->image) }}">
+                            {{ $user->user->name ??  'n/a'}}</li>  
+                        </a>
+                       
+                    
                     @endforeach
                    
                 </ul>

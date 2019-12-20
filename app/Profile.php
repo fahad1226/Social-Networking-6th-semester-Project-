@@ -17,4 +17,9 @@ class Profile extends Model
     {
     	return $this->belongsToMany(User::class);
     }
+
+    public function profileImage()
+    {
+        return ($this->image) ? '/storage/'.$this->image : '/storage' 
+    }
 }

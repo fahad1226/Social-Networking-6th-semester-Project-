@@ -1,4 +1,7 @@
 
+
+@if(Auth::check())
+
 <div class="card gedf-card">
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -15,7 +18,6 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
 
-
                 <form method="POST" action=" {{ url('post/store') }} " enctype="multipart/form-data">
                     @csrf
                     
@@ -23,7 +25,6 @@
                         <label class="sr-only" for="message">post</label>
                         <textarea class="form-control" name="caption" id="message" rows="3" placeholder="What are you thinking?"></textarea>
                     </div>
-
 
                 </div>
                 <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
@@ -43,9 +44,6 @@
 
             </form>
 
-
-
-
             <div class="btn-group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
@@ -60,4 +58,6 @@
     </div>
 </div>
 </div>
+
+@endif
 

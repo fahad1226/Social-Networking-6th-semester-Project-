@@ -6,6 +6,7 @@ use App\Profile;
 use App\User;
 use App\Post;
 use Auth;
+use App\Comment;
 //use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -18,17 +19,17 @@ class PostController extends Controller
     {
         if (Auth::check()) {
             $users = auth()->user()->following()->pluck('profiles.user_id');
-            $posts = Post::with('user')->latest()->get();
+            //$posts = Post::with('user')->latest()->paginate(10);
             //$posts = Post::with('user')->latest()->paginate($this->posts_per_page);
-            $posts = Post::whereIn('user_id',$users)->latest()->get();
+            $posts = Post::whereIn('user_id',$users)->latest()->paginate(10);
             //$followusers = User::all();
             //$followusers=Profile::whereIn('id',$users)->with('user')->get();
-            $followusers = Profile::whereNotIn('id',$users)->with('user')->get();
+            $followusers = Profile::whereNotIn('id',$users)->with('user')->get()->except(auth()->user()->id);
             return view('pages.posts.show',compact('posts','followusers'));
         }
         else {
 
-            $posts = Post::with('user')->latest()->get();
+            $posts = Post::with('user')->latest()->paginate(10);
             return view('pages.posts.show',compact('posts'));
         }
         
@@ -93,6 +94,20 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         return view('pages.posts.post_detail',compact('post'));
+    }
+
+
+    public function storeComment(Request $request,$id)
+    {
+        Comment::create([
+
+            'body' => request('body'),
+            'post_id' => $id,
+            'user_id' => auth()->user()->id
+
+        ]);
+
+        return back();
     }
 
    

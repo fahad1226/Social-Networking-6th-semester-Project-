@@ -3,8 +3,10 @@
 @section('content')
 <div class="container py-3">
 
+	<link rel="stylesheet" type="text/css" href=" {{ asset('custom-css/comments.css') }} ">
+
 	<div class="row">
-		<div class="card gedf-card col-md-6 offset-3">
+		<div class="card col-md-8 offset-2 ">
 			<div class="card-header">
 
 				<div class="d-flex justify-content-between align-items-center">
@@ -50,36 +52,59 @@
 
 		</div>
 		<div>
-		<hr>
-		<h4>Comments</h4>
-		<article>
-			@foreach ($post->comments as $comment)
-			{{ $comment->body }}
-			@endforeach
-				
-		</article>	
-	</div>
-	<strong>Share Your Thoughts</strong>
+			<hr>
 
 
-	<div class="card">
+
+
+
+			<div class="page-header">
+				<h4>Comments</h4>
+			</div> 
+			<div class="comments-list">
+
+				@foreach ($post->comments as $comment)
+				<div class="media">
+
+					<a class="media-left " href="#">
+						<img class="rounded-circle" height="50px" width="50px" src="{{ url('uploads/'.$comment->user->profile->image) }}">
+					</a>
+					<div class="media-body px-2">
+						<p class="float-md-right"><small> {{ $comment->created_at->diffForHumans() }} </small></p>
+						<h4 class="media-heading user_name"> {{ $comment->user->name }} </h4>
+
+						{{ $comment->body }}
+
+						<p><small><a href="">Like</a> - <a href="">replay</a></small></p>
+					</div>
+				</div>
+				@endforeach
+
+			</div>
+
+		</div>
+		@if(Auth::check())
+		<strong>Share Your Thoughts</strong>
+
 		<div class="card-block">
-			<form>
+			<form action=" {{ url('post/'.$post->id.'/comment') }} " method="POST">
+				@csrf
+				
 				<div class="form-group">
 					<textarea name="body" placeholder="Your Comment Here!" class="form-control"></textarea>
+					
 				</div>
 
 				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Comment">
 				</div>
+				
 			</form>
 		</div>
-	</div>
-		
-	</div>
-	
-</div>
 
+		@endif
+	</div>
+</div>
 </div>
 
 @endsection

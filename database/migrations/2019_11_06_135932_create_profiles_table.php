@@ -27,6 +27,7 @@ class CreateProfilesTable extends Migration
             $table->text('info')->nullable();
             $table->timestamps();
             $table->index('user_id');
+            
 
         });
     }
