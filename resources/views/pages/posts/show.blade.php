@@ -17,18 +17,27 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Followers</div>
-                            <div class="h5"> {{ auth()->user()->profile->followers->count() }} </div>
+                            
+                            <div class="h5"> {{ auth()->user()->profile->followers->count() }} 
+                            </div>
+                            
                         </li>
                         <li class="list-group-item">
                             <div class="h6 text-muted">Following</div>
                             <div class="h5">{{ auth()->user()->following->count() }}</div>
                         </li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                       
                     </ul>
                 </div>
                 @endif
             </div>
-            <div class="col-md-6 gedf-main">
+            <div class="col-md-6">
+
+                @if (session()->has('msg'))
+                    <div class="alert alert-success">
+                        <strong>{{ session()->get('msg') }}</strong> 
+                    </div>
+                @endif
 
                 @include('pages.posts.post_box')
                
@@ -42,8 +51,13 @@
                     @foreach ($followusers as $user)
                         
                         <a href=" {{ url('user/'.$user->id) }} ">
-                           <li class="list-group-item"> 
+                           <li class="list-group-item">
+                           @if($user->user->profile->image) 
                             <img class="rounded-circle" height="40px" width="40px" src="{{ url('uploads/'.$user->user->profile->image) }}">
+                            @else
+                            <img class="rounded-circle" height="40px" width="40px" src=" {{ url('default/default.jpg') }} " >
+                            @endif
+
                             {{ $user->user->name ??  'n/a'}}</li>  
                         </a>
                        

@@ -10,7 +10,11 @@
             <div class="d-flex justify-content-between align-items-center">
 
                 <div class="mr-2">
-                    <img class="rounded-circle" width="45" src="{{ url('uploads/'.$post->user->profile->image) }} "  alt="">
+                    @if($post->user->profile->image)
+                    <img class="rounded-circle" width="45" src="{{ url('uploads/'.$post->user->profile->image) }} " >
+                    @else 
+                    <img class="rounded-circle" width="45" src=" {{ url('default/default.jpg') }} " alt="default">
+                    @endif
                 </div>
                 <div class="ml-2">
 

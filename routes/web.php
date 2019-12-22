@@ -42,3 +42,6 @@ Route::get('logout','FollowsController@logout');
 // Route::get('/user/{id}/image', 'ImageController@create');
 // Route::post('/store', 'ImageController@store');
 
+//friends
+
+Route::get('user/{id}/friends','PostController@friends');

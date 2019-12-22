@@ -68,6 +68,22 @@
 						</div>
 						
 					</div>
+
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group focused">
+								<label class="form-control-label" for="input-city">Who Are You?</label>
+								<input type="text" name="title" class="form-control form-control-alternative" placeholder="Title" value=" {{ $profile->title ? : 'N/A' }} ">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group focused">
+								<label class="form-control-label" for="input-country">Description</label>
+								<input type="text" name="description" class="form-control form-control-alternative" placeholder="descibe yourself" value=" {{ $profile->description ? : 'a few words about you' }} ">
+							</div>
+						</div>
+						
+					</div>
 				</div>
 				<hr class="my-4">
 				<!-- Description -->

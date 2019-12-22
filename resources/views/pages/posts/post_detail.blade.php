@@ -13,7 +13,11 @@
 					<div class="d-flex justify-content-between align-items-center">
 
 						<div class="mr-2">
-							<img class="rounded-circle" width="45" src="{{ url('uploads/'.$post->user->profile->image) }} "  alt="">
+							@if($post->user->profile->image)
+							<img class="rounded-circle" width="45" src="{{ url('uploads/'.$post->user->profile->image) }} ">
+							@else
+							<img class="rounded-circle" width="45" src=" {{ url('default/default.jpg') }} "  >
+							@endif
 						</div>
 						<div class="ml-2">
 
@@ -42,10 +46,9 @@
 					{{ $post->caption  }}
 				</p>
 
-				@if($post->img == true)
+				@if($post->img)
 
 				<img class="polaroid" height="400" width="550" src="{{ url('uploads/thumbnail/'.$post->img) }} ">
-
 				@endif 
 
 			</div>
@@ -55,9 +58,6 @@
 			<hr>
 
 
-
-
-
 			<div class="page-header">
 				<h4>Comments</h4>
 			</div> 
@@ -65,10 +65,13 @@
 
 				@foreach ($post->comments as $comment)
 				<div class="media">
-
+					@if($comment->user->profile->image)
 					<a class="media-left " href="#">
 						<img class="rounded-circle" height="50px" width="50px" src="{{ url('uploads/'.$comment->user->profile->image) }}">
 					</a>
+					@else
+					<img class="rounded-circle" height="50px" width="50px" src=" {{ url('default/default.jpg') }} " alt="default">
+					@endif
 					<div class="media-body px-2">
 						<p class="float-md-right"><small> {{ $comment->created_at->diffForHumans() }} </small></p>
 						<h4 class="media-heading user_name"> {{ $comment->user->name }} </h4>

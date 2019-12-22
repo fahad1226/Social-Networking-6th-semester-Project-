@@ -23,13 +23,13 @@ class PostController extends Controller
             //$posts = Post::with('user')->latest()->paginate($this->posts_per_page);
             $posts = Post::whereIn('user_id',$users)->latest()->paginate(10);
             //$followusers = User::all();
-            //$followusers=Profile::whereIn('id',$users)->with('user')->get();
+            //$friends = Profile::whereIn('id',$users)->with('user')->get();
             $followusers = Profile::whereNotIn('id',$users)->with('user')->get()->except(auth()->user()->id);
             return view('pages.posts.show',compact('posts','followusers'));
         }
         else {
 
-            $posts = Post::with('user')->latest()->paginate(10);
+            $posts = Post::with('user')->latest()->paginate(7);
             return view('pages.posts.show',compact('posts'));
         }
         
@@ -64,13 +64,14 @@ class PostController extends Controller
           'img'=> $fullname
         ]);
 
-        return redirect('posts');
+        return redirect('posts')->with('msg','Post Uploaded Successfully');
     }
 
 
     public function edit($id)
     {
     	$post = Post::find($id);
+        $this->authorize('update',$post);
     	return view('pages.posts.edit',compact('post'));
     }
 
@@ -79,14 +80,15 @@ class PostController extends Controller
     	$obj = Post::find($id);
     	$obj->caption = $request->caption;
     	$obj->save();
-    	return redirect('posts');
+    	return redirect('user/'.auth()->user()->id.'/timeline')->with('msg','Post Updated Successfully');
     }
 
     public function destroy($id)
     {
         $post = Post::find($id);
+        $this->authorize('delete',$post);
         $post->delete();
-        return redirect('posts');
+        return redirect('user/'.auth()->user()->id.'/timeline');
     }
 
 
@@ -108,6 +110,14 @@ class PostController extends Controller
         ]);
 
         return back();
+    }
+
+    public function friends($id)
+    {
+        $user = User::find($id);
+        $users = $user->following()->pluck('profiles.user_id');
+        $friends = Profile::whereIn('id',$users)->with('user')->get();
+        return view('pages.profile.layouts.friends',compact('friends'));
     }
 
    

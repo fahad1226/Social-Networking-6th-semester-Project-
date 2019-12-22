@@ -8,9 +8,13 @@
 						<div class="row justify-content-center">
 							<div class="col-lg-3 order-lg-2">
 								<div class="card-profile-image">
+									@if($profile->image)
 									<a href="#">
-										<img src="{{ url('uploads/'.$profile->image) }} " class="rounded-circle">
+									<img src="{{ url('uploads/'.$profile->image) }} " class="rounded-circle">
 									</a>
+									@else 
+										<img class="rounded-circle" src=" {{ url('default/default.jpg') }} " alt="default image">
+									@endif
 								</div>
 							</div>
 						</div>
@@ -26,15 +30,17 @@
 									<div class="card-profile-stats d-flex justify-content-center mt-md-5">
 										<div>
 											<span class="heading"> {{ $profile->followers->count() }} </span>
-											<span class="description">Followers</span>
+											<span class="description"><strong>Followers</strong></span>
 										</div>
 										<div>
 											<span class="heading"> {{ $profile->user->following->count() }} </span>
-											<span class="description">Following</span>
+											<a href=" {{ url('user/'.$profile->id.'/friends') }} ">
+												<span class="description"><strong>Following</strong></span>
+											</a>
 										</div>
 										<div>
 											<span class="heading"> {{ $profile->user->posts->count() }} </span>
-											<span class="description">Posts</span>
+											<span class="description"><strong>Posts</strong></span>
 										</div>
 									</div>
 								</div>
@@ -48,10 +54,12 @@
 									{{ $profile->user->email }}
 								</div>
 								<div class="h5 mt-4">
-									<i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+									<i class="ni business_briefcase-24 mr-2"></i> 
+									{{ $profile->description }}
 								</div>
 								<div>
-									<i class="ni education_hat mr-2"></i>University of Computer Science
+									<i class="ni education_hat mr-2"></i>
+									{{ $profile->info }}
 								</div>
 								<hr class="my-4">
 								

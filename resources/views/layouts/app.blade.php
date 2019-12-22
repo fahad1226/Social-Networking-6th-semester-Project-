@@ -51,8 +51,7 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <i type=button id="updownbutton" data-toggle="tooltip" data-placement="top" title="hide the navigation bar" style='font-size:24px' class='fas '>&#xf35b;</i>
-
+                            
                             <a id="navbarDropdown" class="d-inline nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
@@ -85,15 +84,3 @@
 </div>
 </body>
 </html>
-<script
-src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-crossorigin="anonymous"></script>
-
-<script>
-    $(document).ready(function() {
-        $("#updownbutton").click(function() {
-            $("#mynav").slideUp(1000);
-        });
-    });
-</script>

@@ -82,13 +82,15 @@ class ProfileController extends Controller
        $profile = Profile::find($id);
        $data = $request->validate([
 
-            'image'     => '',
-            'fname'     => 'required',
-            'lname'     => 'required',
-            'address'   => '',
-            'city'      => '',
-            'country'   => '',
-            'info'      => ''
+            'title'         => '',
+            'description'   => '',
+            'image'         => '',
+            'fname'         => 'required',
+            'lname'         => 'required',
+            'address'       => '',
+            'city'          => '',
+            'country'       => '',
+            'info'          => ''
         ]);
       
        
@@ -110,7 +112,7 @@ class ProfileController extends Controller
             auth()->user()->profile->update(['image'=>$fullname]);
           } 
 
-        return redirect('user/'.auth()->user()->id.'/edit');
+        return redirect('user/'.auth()->user()->id);
 
     }
 
