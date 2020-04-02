@@ -15,7 +15,6 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
@@ -26,8 +25,11 @@ class CreateProfilesTable extends Migration
             $table->string('country')->nullable();
             $table->text('info')->nullable();
             $table->timestamps();
-            $table->index('user_id');
-            
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                          ->references('id')->on('users')
+                          ->onDelete('cascade');
+                                
 
         });
     }

@@ -33,7 +33,6 @@ class PostController extends Controller
             return view('pages.posts.show',compact('posts'));
         }
         
-
     }
 
     public function store(Request $request)
@@ -103,9 +102,9 @@ class PostController extends Controller
     {
         Comment::create([
 
-            'body' => request('body'),
-            'post_id' => $id,
-            'user_id' => auth()->user()->id
+            'body'      => request('body'),
+            'post_id'   => $id,
+            'user_id'   => auth()->user()->id
 
         ]);
 

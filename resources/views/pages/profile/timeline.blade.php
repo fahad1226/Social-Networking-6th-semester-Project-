@@ -18,9 +18,9 @@
 
             <li class="list-group-item"> <strong>lives in </strong> {{ $timeline->profile->city ?? 'not available' }}</li>
             <li class="list-group-item"><strong>Address:</strong> {{ $timeline->profile->address ?? 'not available' }} </li>
-            <li class="list-group-item"> <strong>you're from</strong> {{ $timeline->profile->country ?? 'not available' }} </li>
+            <li class="list-group-item"> <strong> From </strong> {{ $timeline->profile->country ?? 'not available' }} </li>
             
-            <li class="list-group-item"> <strong>My Info: </strong> {{ $timeline->profile->info ?? 'not available' }} </li>
+            <li class="list-group-item"> <strong>Info </strong> {{ $timeline->profile->info ?? 'not available' }} </li>
 
           </ul>
         </div>

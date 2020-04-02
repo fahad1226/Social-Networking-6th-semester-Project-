@@ -20,6 +20,7 @@
 				</a>
 			</ul>
 			@endforeach
+			{{ $users->links() }}
 		</div>
 	</div>
 </div>
